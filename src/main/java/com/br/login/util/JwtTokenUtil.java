@@ -21,7 +21,7 @@ public class JwtTokenUtil implements Serializable {
 
     public String generateAccessToken(UserModel userModel) {
         return PREFIX_TOKEN + Jwts.builder()
-                .setSubject(format("%s", userModel.getId()))
+                .setSubject(format("%s", userModel.getNome()))
                 .setIssuer(userModel.getEmail())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + 7 * 24 * 60 * 60 * 1000)) // 1 week

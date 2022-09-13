@@ -25,7 +25,7 @@ public class UserModel implements UserDetails {
     @JoinTable(name = "tb_user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private List<Role> roles;
+    private Set<Role> roles;
 
 
     public Long getId() {
@@ -76,11 +76,11 @@ public class UserModel implements UserDetails {
         this.telefone = telefone;
     }
 
-    public List<Role> getRoles() {
+    public Set<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<Role> roles) {
+    public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
 

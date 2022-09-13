@@ -1,14 +1,16 @@
 package com.br.login.model.dto;
 
+import com.br.login.enumearation.RoleName;
+
 public class RoleDTO {
 
-    private final String authority;
+    private RoleName roleName;
 
-    public RoleDTO(String authority) {
-        this.authority = authority;
+    public RoleDTO(RoleName roleName) {
+        this.roleName = roleName;
     }
 
-    public String getAuthority() {
-        return authority;
+    public RoleName getRoleName() {
+        return roleName;
     }
 }
