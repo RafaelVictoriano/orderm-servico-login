@@ -37,7 +37,7 @@ public record AuthenticationController(UserDetailsServiceImpl userDetailsService
     }
 
 
-   // @RolesAllowed(ROLES_GERENTE)
+   @RolesAllowed(ROLES_GERENTE)
     @PostMapping("register")
     public UserResponseDTO register(@RequestBody UserDto request) throws ValidationException {
         return userDetailsServiceImpl.create(request);
