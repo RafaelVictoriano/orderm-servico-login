@@ -7,11 +7,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 @Entity
-@Table(name = "users")
-public class UserModel implements UserDetails {
+@Table(name = "usuarios")
+public class Usuario implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,12 +20,16 @@ public class UserModel implements UserDetails {
     private String cpf;
     private String nome;
     private Long telefone;
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "tb_user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles;
+    @OneToOne
+    private Perfil perfil;
 
+    public Perfil getPerfil() {
+        return perfil;
+    }
+
+    public void setPerfil(Perfil perfil) {
+        this.perfil = perfil;
+    }
 
     public Long getId() {
         return id;
@@ -76,17 +79,9 @@ public class UserModel implements UserDetails {
         this.telefone = telefone;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
-    }
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return roles;
+        return List.of(perfil);
     }
 
     public String getPassword() {

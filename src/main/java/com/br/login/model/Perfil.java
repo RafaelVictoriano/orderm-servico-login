@@ -6,36 +6,33 @@ import org.springframework.security.core.GrantedAuthority;
 import javax.persistence.*;
 
 @Entity
-public class Role implements GrantedAuthority {
+public class Perfil implements GrantedAuthority {
 
     public static final String ROLES_GERENTE = "ROLES_GERENTE";
     public static final String ROLES_FUNCIONARIO = "ROLES_FUNCIONARIO";
     public static final String ROLES_CLIENTE = "ROLES_CLIENTE";
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     @Enumerated(EnumType.STRING)
-    private RoleName roleName;
+    private RoleName nome;
 
-    public Role() {
+    @OneToOne(mappedBy = "perfil")
+    private Usuario usuario;
+
+    public Perfil() {
     }
 
-    public Long getId() {
-        return id;
+
+    public RoleName getNome() {
+        return nome;
     }
 
-    public RoleName getRoleName() {
-        return roleName;
-    }
-
-    public void setRoleName(RoleName roleName) {
-        this.roleName = roleName;
+    public void setNome(RoleName nome) {
+        this.nome = nome;
     }
 
     @Override
     public String getAuthority() {
-        return roleName.toString();
+        return nome.toString();
     }
 }

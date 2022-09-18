@@ -9,24 +9,25 @@ import java.util.Set;
 public class UserResponseDTO implements Serializable {
     private final String email;
     private final String nome;
-    private final Set<RoleDTO> roles;
 
-    public UserResponseDTO(String email, String nome, Set<RoleDTO> roles) {
+    private final String perfil;
+
+
+    public UserResponseDTO(String email, String nome, String perfil) {
         this.email = email;
         this.nome = nome;
-        this.roles = roles;
-    }
-
-    public String getNome() {
-        return nome;
+        this.perfil = perfil;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public Set<RoleDTO> getRoles() {
-        return roles;
+    public String getNome() {
+        return nome;
     }
 
+    public String getPerfil() {
+        return perfil;
+    }
 }

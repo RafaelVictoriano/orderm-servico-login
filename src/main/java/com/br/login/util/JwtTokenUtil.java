@@ -1,9 +1,10 @@
 package com.br.login.util;
 
-import com.br.login.model.UserModel;
+import com.br.login.model.Usuario;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
@@ -19,10 +20,10 @@ public class JwtTokenUtil implements Serializable {
 
     private final static String PREFIX_TOKEN = "Bearer ";
 
-    public String generateAccessToken(UserModel userModel) {
+    public String generateAccessToken(UserDetails usuario) {
         return PREFIX_TOKEN + Jwts.builder()
-                .setSubject(format("%s", userModel.getNome()))
-                .setIssuer(userModel.getEmail())
+                .setSubject(format("%s", usuario.getUsername()))
+                .setIssuer(usuario.getUsername())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + 7 * 24 * 60 * 60 * 1000)) // 1 week
                 .signWith(getSigningKey())
